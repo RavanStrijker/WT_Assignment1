@@ -1,7 +1,62 @@
 body {
-    background-color: rgb(200, 200, 200)
+    background-color: rgb(110, 134, 150);
+    color: rgb(36, 36, 36);
+    /*background-image: url("../img/bg.jpg");*/
+    background-size: cover;
 }
 
-#section {
-    color: rgb(20, 20, 20)
+#grid {
+    display:grid;
+    gap: 10px;
+    grid-template-areas: ". h h h ."
+                         ". n n n ."
+                         ". s s a .";
+    /*margin-left: 100px;*/
+    /*margin-right: 100px;*/
+}
+
+#grid > header {
+    grid-area: h;
+    background-image: url("../img/html5.png");
+    background-repeat:no-repeat;
+    background-position: center;
+    background-size: contain;
+    height:100px;
+}
+
+#grid > nav {
+    grid-area: n;
+    text-align: center;
+    background-color: orangered;
+    box-shadow: -1px 1px 7px 1px;
+    padding: 5px;
+}   
+
+#grid > nav > a {
+    background-color: white;
+    color: inherit;
+    border-radius: 2px;
+    border: 1px solid black;
+    padding:2px;
+    text-decoration: none;
+}
+
+#grid > .section {
+    grid-area: s;
+    background-color: white;
+    color: inherit;
+    padding: 10px;
+    box-shadow: -1px 1px 7px 1px;
+}
+
+#grid > .aside {
+    grid-area: a;
+    background-color: white;
+    color: inherit;
+    padding: 10px;
+    box-shadow: 1px 1px 7px 1px;
+}
+
+#grid > .empty {
+    grid-area: e;
 }
