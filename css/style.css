@@ -69,3 +69,7 @@ body {
 #grid > .footer > img {
     margin:5px;
 }
+
+#grid > .footer > ul {
+    list-style: none;
+}
