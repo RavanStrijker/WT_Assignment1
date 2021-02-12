@@ -10,7 +10,8 @@ body {
     gap: 10px;
     grid-template-areas: ". h h h ."
                          ". n n n ."
-                         ". s s a .";
+                         ". s s a ."
+                         ". f f f .";
     /*margin-left: 100px;*/
     /*margin-right: 100px;*/
 }
@@ -57,6 +58,14 @@ body {
     box-shadow: 1px 1px 7px 1px;
 }
 
-#grid > .empty {
-    grid-area: e;
+#grid > .footer {
+    grid-area: f;
+    background-color: white;
+    color: inherit;
+    padding: 10px;
+    box-shadow: -1px 1px 7px 1px;
+}
+
+#grid > .footer > img {
+    margin:5px;
 }
