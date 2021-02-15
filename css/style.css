@@ -37,12 +37,19 @@ body {
     background-color: white;
     color: inherit;
     border-radius: 2px;
-    border: 1px solid black;
+    border: 1px solid transparent;
     padding:2px;
     text-decoration: none;
+    transition: 0.4s ease;
 }
 
-#grid > .section {
+#grid > nav > a:hover{
+background-color: orangered;
+border-color: white;
+color: white;
+}
+
+#grid > section {
     grid-area: s;
     background-color: white;
     color: inherit;
@@ -50,7 +57,7 @@ body {
     box-shadow: -1px 1px 7px 1px;
 }
 
-#grid > .aside {
+#grid > aside {
     grid-area: a;
     background-color: white;
     color: inherit;
@@ -58,7 +65,7 @@ body {
     box-shadow: 1px 1px 7px 1px;
 }
 
-#grid > .footer {
+#grid > footer {
     grid-area: f;
     background-color: white;
     color: inherit;
@@ -66,10 +73,24 @@ body {
     box-shadow: -1px 1px 7px 1px;
 }
 
-#grid > .footer > img {
+#grid > footer > a{
+    text-decoration-line: none;
+    color: black;
+}
+
+#grid > footer > a > strong{
+    padding-left: 10px;
+}
+
+#grid > footer > img {
     margin:5px;
 }
 
-#grid > .footer > ul {
+#grid > footer > table{
+    padding-left: 10px;
+    padding-top: 3px;
+}
+
+#grid > footer > ul {
     list-style: none;
 }
