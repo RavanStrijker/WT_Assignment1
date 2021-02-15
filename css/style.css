@@ -43,7 +43,7 @@ body {
     transition: 0.4s ease;
 }
 
-#grid > nav > a:hover{
+#grid > nav > a:hover, #grid > nav > a:focus{
 background-color: orangered;
 border-color: white;
 color: white;
