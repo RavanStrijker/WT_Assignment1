@@ -3,6 +3,11 @@ body {
     color: rgb(36, 36, 36);
     /*background-image: url("../img/bg.jpg");*/
     background-size: cover;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
 }
 
 #grid {
@@ -12,8 +17,6 @@ body {
                          ". n n n ."
                          ". s s a ."
                          ". f f f .";
-    /*margin-left: 100px;*/
-    /*margin-right: 100px;*/
 }
 
 #grid > header {
@@ -41,19 +44,20 @@ body {
     padding:2px;
     text-decoration: none;
     transition: 0.4s ease;
+    font-size:20px;
 }
 
 #grid > nav > a:hover, #grid > nav > a:focus{
-background-color: orangered;
-border-color: white;
-color: white;
+    background-color: orangered;
+    border-color: white;
+    color: white;
 }
 
 #grid > section {
     grid-area: s;
     background-color: white;
     color: inherit;
-    padding: 10px;
+    padding: 15px;
     box-shadow: -1px 1px 7px 1px;
 }
 
@@ -61,7 +65,7 @@ color: white;
     grid-area: a;
     background-color: white;
     color: inherit;
-    padding: 10px;
+    padding: 15px;
     box-shadow: 1px 1px 7px 1px;
 }
 
@@ -69,17 +73,8 @@ color: white;
     grid-area: f;
     background-color: white;
     color: inherit;
-    padding: 10px;
+    padding: 15px;
     box-shadow: -1px 1px 7px 1px;
-}
-
-#grid > footer > a{
-    text-decoration-line: none;
-    color: black;
-}
-
-#grid > footer > a > strong{
-    padding-left: 10px;
 }
 
 #grid > footer > img {
@@ -91,6 +86,6 @@ color: white;
     padding-top: 3px;
 }
 
-#grid > footer > ul {
-    list-style: none;
+table a {
+    color:black;
 }
