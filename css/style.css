@@ -1,9 +1,13 @@
 body {
     background-color: rgb(110, 134, 150);
     color: rgb(50, 50, 50);
-    /*background-image: url("../img/bg.jpg");*/
-    background-size: cover;
+    /* background-image: url("../img/bg.jpg"); 
+    background-size: cover; */
     font-family: 'Open Sans', sans-serif;
+}
+
+section p {
+    max-width: 80ch;
 }
 
 body a {
@@ -11,7 +15,7 @@ body a {
 }
 
 body a:hover, body a:focus {
-    color:orangered;
+    color:rgb(229,76,33);
 }
 
 h1 {
@@ -19,13 +23,25 @@ h1 {
     font-size:2em;
 }
 
+li:nth-of-type(even){
+    background-color: lightgrey;
+}
+
 #grid {
     display:grid;
     gap: 10px;
-    grid-template-areas: ". h h h h h h ."
-                         ". n n n n n n ."
-                         ". s s s s s a ."
-                         ". f f f f f f .";
+    grid-template-areas: ". h ."
+                         ". n ."
+                         ". s ."
+                         ". f .";
+}
+
+.empty-column--left {
+    grid-area: l;
+}
+
+.empty-column-right {
+    grid-area: r;
 }
 
 #grid > header {
@@ -40,17 +56,16 @@ h1 {
 #grid > nav {
     grid-area: n;
     text-align: center;
-    background-color: orangered;
+    background-color: rgb(229,76,33);
     box-shadow: -1px 1px 7px 1px;
     padding: 6px;
 }   
 
 #grid > nav > a {
-    background-color: white;
+    background-color: #ECECEC;
     color: inherit;
-    font-weight: normal;
     border-radius: 2px;
-    border: 1px solid transparent;
+    border: 1px solid black;
     padding:2px;
     text-decoration: none;
     transition: 0.4s ease;
@@ -61,31 +76,45 @@ h1 {
 }
 
 #grid > nav > a:hover, #grid > nav > a:focus{
-    background-color: orangered;
-    border-color: white;
-    color: white;
+    background-color: rgb(229,76,33);
+    border-color: #ECECEC;
+    color: #ECECEC;
 }
 
 #grid > section {
     grid-area: s;
-    background-color: white;
-    color: inherit;
-    padding: 15px;
-    box-shadow: -1px 1px 7px 1px;
-    max-width: 1500px;
+    display:grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-auto-flow: dense;
 }
 
-#grid > aside {
-    grid-area: a;
-    background-color: white;
+#grid > section > article {
+    background-color: #ECECEC;
     color: inherit;
     padding: 15px;
     box-shadow: 1px 1px 7px 1px;
 }
 
+#grid > section > aside {
+    background-color: #ECECEC;
+    color: inherit;
+    padding: 15px;
+    box-shadow: 1px 1px 7px 1px;
+}
+
+/* Older version of grid layout (aside outside section)
+#grid > aside {
+    grid-area: a;
+    background-color: #ECECEC;
+    color: inherit;
+    padding: 15px;
+    box-shadow: 1px 1px 7px 1px;
+}*/
+
 #grid > footer {
     grid-area: f;
-    background-color: white;
+    background-color: #ECECEC;
     color: inherit;
     padding: 15px;
     box-shadow: -1px 1px 7px 1px;
@@ -104,7 +133,9 @@ h1 {
 }
 
 .section__highlighted-text {
-    border-left: 3px solid orangered;
+    display:inline-block;
+    margin: -4px; /* To counteract inline-block's automatic margin */
+    border-left: 3px solid rgb(229,76,33);
     padding: 4px;
     border-radius: 3px;
     color:black;
