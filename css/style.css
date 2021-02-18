@@ -1,22 +1,31 @@
 body {
     background-color: rgb(110, 134, 150);
-    color: rgb(36, 36, 36);
+    color: rgb(50, 50, 50);
     /*background-image: url("../img/bg.jpg");*/
     background-size: cover;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body a {
+    color:black;
+}
+
+body a:hover, body a:focus {
+    color:orangered;
 }
 
 h1 {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-size:2em;
 }
 
 #grid {
     display:grid;
     gap: 10px;
-    grid-template-areas: ". h h h ."
-                         ". n n n ."
-                         ". s s a ."
-                         ". f f f .";
+    grid-template-areas: ". h h h h h h ."
+                         ". n n n n n n ."
+                         ". s s s s s a ."
+                         ". f f f f f f .";
 }
 
 #grid > header {
@@ -33,18 +42,22 @@ h1 {
     text-align: center;
     background-color: orangered;
     box-shadow: -1px 1px 7px 1px;
-    padding: 5px;
+    padding: 6px;
 }   
 
 #grid > nav > a {
     background-color: white;
     color: inherit;
+    font-weight: normal;
     border-radius: 2px;
     border: 1px solid transparent;
     padding:2px;
     text-decoration: none;
     transition: 0.4s ease;
     font-size:20px;
+    padding-left:4px;
+    padding-right:4px;
+    margin-right:4px;
 }
 
 #grid > nav > a:hover, #grid > nav > a:focus{
@@ -59,6 +72,7 @@ h1 {
     color: inherit;
     padding: 15px;
     box-shadow: -1px 1px 7px 1px;
+    max-width: 1500px;
 }
 
 #grid > aside {
@@ -77,15 +91,30 @@ h1 {
     box-shadow: -1px 1px 7px 1px;
 }
 
-#grid > footer > img {
+.footer__logo {
     margin:5px;
+    height:100px;
+    float:left;
 }
 
-#grid > footer > table{
+.footer__credit-table {
     padding-left: 10px;
     padding-top: 3px;
+    float:left;
 }
 
-table a {
+.section__highlighted-text {
+    border-left: 3px solid orangered;
+    padding: 4px;
+    border-radius: 3px;
     color:black;
+    background-color: lightgrey;
+}
+
+.section__figure {
+    float:right;
+}
+
+.section__figure img {
+    width:100px;
 }
