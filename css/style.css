@@ -23,6 +23,10 @@ h1 {
     font-size:2em;
 }
 
+li {
+    max-width: 80ch;
+}
+
 li:nth-of-type(even){
     background-color: lightgrey;
 }
