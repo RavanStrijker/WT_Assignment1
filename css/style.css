@@ -100,6 +100,10 @@ li:nth-of-type(even){
     box-shadow: 1px 1px 7px 1px;
 }
 
+#grid > section > article > h1{
+    text-align: center;
+}
+
 #grid > section > aside {
     background-color: #ECECEC;
     color: inherit;
@@ -146,14 +150,24 @@ li:nth-of-type(even){
     background-color: lightgrey;
 }
 
-.section__figure {
-    padding-left: 75px;
-}
 .section__figure figcaption{
-    padding-left: 65px;
+    text-align: center;
     padding-top: 10px;
 }
 
 .section__figure img {
-    width:300px;
+    width: 300px;
+    padding-top: 15px;
+    padding-left: 70px;
+}
+
+.section__figure div > img {
+    width: 400px;
+    padding-top: 40px;
+    padding-left: 15px;
+}
+
+.section__figure div > img:hover {
+    width: 600px;
+    padding-left: 0px;
 }
