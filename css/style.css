@@ -147,9 +147,13 @@ li:nth-of-type(even){
 }
 
 .section__figure {
-    float:right;
+    padding-left: 75px;
+}
+.section__figure figcaption{
+    padding-left: 65px;
+    padding-top: 10px;
 }
 
 .section__figure img {
-    width:100px;
+    width:300px;
 }
