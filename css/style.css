@@ -66,6 +66,8 @@ li:nth-of-type(even){
 }   
 
 #grid > nav > a {
+    width: auto;
+    max-height: 100%;
     background-color: #ECECEC;
     color: inherit;
     border-radius: 2px;
@@ -79,7 +81,7 @@ li:nth-of-type(even){
     margin-right:4px;
 }
 
-#grid > nav > a:hover, #grid > nav > a:focus{
+#grid > nav > a:hover, #grid > nav > a:focus, #grid > nav > a.active{
     background-color: rgb(229,76,33);
     border-color: #ECECEC;
     color: #ECECEC;
@@ -128,6 +130,10 @@ li:nth-of-type(even){
     box-shadow: -1px 1px 7px 1px;
 }
 
+#grid > footer > p{
+    text-align: right;
+}
+
 .footer__logo {
     margin:5px;
     height:100px;
@@ -150,24 +156,54 @@ li:nth-of-type(even){
     background-color: lightgrey;
 }
 
+.section__figure{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 60%;
+}
+
 .section__figure figcaption{
     text-align: center;
     padding-top: 10px;
 }
 
 .section__figure img {
+    max-width:100%;
+    height:auto;
     width: 300px;
     padding-top: 15px;
-    padding-left: 70px;
 }
 
 .section__figure div > img {
+    max-width:100%;
+    height:auto;
     width: 400px;
     padding-top: 40px;
-    padding-left: 15px;
+    position: relative;
 }
 
-.section__figure div > img:hover {
-    width: 600px;
-    padding-left: 0px;
+@media screen and (max-width: 450px){
+    #grid > nav{ 
+        width: 90%;
+        height: 90%;
+    }
+
+    #grid > nav > a{
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    #grid > section > article, #grid > section > aside{
+        width: 85%;
+        margin-top: +20px;
+    }
+
+    #grid > footer{
+    width: 85%;
+    }
+
+    #grid > footer > table{
+        margin-right: +20px;
+    }
 }
