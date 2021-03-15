@@ -59,7 +59,7 @@ li:nth-of-type(even){
 
 #grid > nav {
     grid-area: n;
-    text-align: center;
+    text-align: left;
     background-color: rgb(229,76,33);
     box-shadow: -1px 1px 7px 1px;
     padding: 6px;
@@ -85,6 +85,11 @@ li:nth-of-type(even){
     background-color: rgb(229,76,33);
     border-color: #ECECEC;
     color: #ECECEC;
+}
+
+#grid > nav > select{
+    float: right;
+    font-size: 20px;
 }
 
 #grid > section {
