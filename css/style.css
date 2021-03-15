@@ -134,15 +134,6 @@ li:nth-of-type(even){
     box-shadow: 1px 1px 7px 1px;
 }
 
-/* Older version of grid layout (aside outside section)
-#grid > aside {
-    grid-area: a;
-    background-color: #ECECEC;
-    color: inherit;
-    padding: 15px;
-    box-shadow: 1px 1px 7px 1px;
-}*/
-
 #grid > footer {
     grid-area: f;
     background-color: #ECECEC;
@@ -168,13 +159,12 @@ li:nth-of-type(even){
 }
 
 .section__highlighted-text {
-    display:inline-block;
-    margin: -4px; /* To counteract inline-block's automatic margin */
     border-left: 3px solid rgb(229,76,33);
     padding: 4px;
     border-radius: 3px;
     color:black;
     background-color: lightgrey;
+    word-wrap:break-word;
 }
 
 .section__figure{
