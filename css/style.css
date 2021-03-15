@@ -23,6 +23,22 @@ h1 {
     font-size:2em;
 }
 
+h2{
+    border-bottom: rgb(200, 200, 200) 1px solid;
+    padding-bottom: 2px;
+}
+
+h2::before{
+    color:rgb(200, 200, 200);
+    font-size:0.66em;
+    content:'\25bc';
+    margin-right: .33em;
+}
+
+.collapsed::before{
+    content:'\27a4';
+}
+
 li {
     max-width: 80ch;
 }
@@ -212,3 +228,8 @@ li:nth-of-type(even){
         margin-right: +20px;
     }
 }
+
+::selection {
+    color: white;
+    background: rgb(229,76,33);
+  }
