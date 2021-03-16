@@ -75,11 +75,45 @@ function fillSelector(){
    }
 }
 
-
-
 function enableEditor(){
    var editor = document.getElementById('editor');
    editor.addEventListener('change',changeSelected, false);
+}
+
+function fillEditor(){
+   var editor = document.getElementById('editor');
+   var fontsizeoptions = ["25%","50%","75%","100%","125%","150%","175%","200%"];
+   var coloroptions = ["black", "white", "orange", "red", "green", "blue", "yellow"];
+
+   var fontsizegroup = document.createElement("optgroup");
+   fontsizegroup.label = "Font-size";
+   editor.add(fontsizegroup);
+   addArrayElements(editor, fontsizeoptions, "Font-size");
+
+   var colorgroup = document.createElement("optgroup");
+   colorgroup.label = "Text-color";
+   editor.add(colorgroup);
+   addArrayElements(editor, coloroptions, "Text-color");
+
+   var bgcolorgroup = document.createElement("optgroup");
+   bgcolorgroup.label = "Background";
+   editor.add(bgcolorgroup);
+   addArrayElements(editor, coloroptions, "Background");
+}
+
+function addArrayElements(editor, array, category) {
+   for (let i = 0; i < array.length; i++){
+      var option = array[i];
+      var toAdd = document.createElement("option");
+      toAdd.textContent = capitaliseFirst(option);
+      toAdd.value = option;
+      toAdd.category = category;
+      editor.add(toAdd);
+   }
+}
+
+function capitaliseFirst(str){
+   return str[0].toUpperCase() + str.substr(1);
 }
 
 function changeSelected(){
@@ -89,13 +123,13 @@ function changeSelected(){
       var selectedValue = document.getElementById(selectedOption.value);
       var editor = document.getElementById('editor');
       var change = editor.options[editor.selectedIndex];
-      if(change.parentElement.label == "Font-size"){
+      if(change.category == "Font-size"){
          selectedValue.style.fontSize = change.value;
       }
-      else if(change.parentElement.label == "Text-color"){
+      else if(change.category == "Text-color"){
          selectedValue.style.color = change.value;
       }
-      else if(change.parentElement.label == "Background"){
+      else if(change.category == "Background"){
          selectedValue.style.backgroundColor = change.value;
       }
    }
@@ -104,6 +138,7 @@ function changeSelected(){
 function initialise() {
    addHandlers();
    fillSelector();
+   fillEditor();
    enableEditor();
 }
 

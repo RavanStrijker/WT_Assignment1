@@ -98,6 +98,10 @@ li:nth-of-type(even){
     margin-right:4px;
 }
 
+#grid > nav > select {
+    margin-left:9px;
+}
+
 #grid > nav > a:hover, #grid > nav > a:focus, #grid > nav > a.active{
     background-color: rgb(229,76,33);
     border-color: #ECECEC;
