@@ -67,7 +67,7 @@ function fillSelector(){
    if(document.getElementsByTagName('section').length > 1) {
       selector.add(optgroup1);
    }
-   
+
    for(i=1; i<document.getElementsByTagName('section').length; i++) {
       var option = document.createElement("option");
       option.value = document.getElementsByTagName('section')[i].id;
@@ -77,3 +77,29 @@ function fillSelector(){
 }
 
 window.addEventListener('load', fillSelector, false);
+
+function enableEditor(){
+   var editor = document.getElementById('editor');
+   editor.addEventListener('change',changeSelected, false);
+}
+
+function changeSelected(){
+   var selector = document.getElementById('selector');
+   var selectedOption = selector.options[selector.selectedIndex];
+   if(selectedOption !== null){
+      var selectedValue = document.getElementById(selectedOption.value);
+      var editor = document.getElementById('editor');
+      var change = editor.options[editor.selectedIndex];
+      if(change.parentElement.label == "Font-size"){
+         selectedValue.style.fontSize = change.value;
+      }
+      else if(change.parentElement.label == "Text-color"){
+         selectedValue.style.color = change.value;
+      }
+      else if(change.parentElement.label == "Background"){
+         selectedValue.style.backgroundColor = change.value;
+      }
+   }
+}
+
+window.addEventListener('load', enableEditor, false);

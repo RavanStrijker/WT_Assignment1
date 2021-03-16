@@ -11,7 +11,7 @@ section p {
 }
 
 body a {
-    color:black;
+    color:inherit;
 }
 
 body a:hover, body a:focus {
@@ -79,6 +79,7 @@ li:nth-of-type(even){
     background-color: rgb(229,76,33);
     box-shadow: -1px 1px 7px 1px;
     padding: 6px;
+    font-size:20px;
 }   
 
 #grid > nav > a {
@@ -91,7 +92,7 @@ li:nth-of-type(even){
     padding:2px;
     text-decoration: none;
     transition: 0.4s ease;
-    font-size:20px;
+    font-size:inherit;
     padding-left:4px;
     padding-right:4px;
     margin-right:4px;
@@ -105,7 +106,8 @@ li:nth-of-type(even){
 
 #grid > nav > select{
     float: right;
-    font-size: 20px;
+    font-size: inherit;
+    color: inherit;
 }
 
 #grid > section {
@@ -223,4 +225,6 @@ li:nth-of-type(even){
     color: white;
     background: rgb(229,76,33);
   }
+
+
 
