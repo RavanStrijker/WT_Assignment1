@@ -24,19 +24,19 @@ h1 {
 }
 
 h2{
-    border-bottom: rgb(200, 200, 200) 1px solid;
+    border-bottom: rgb(175, 175, 175) 1px solid;
     padding-bottom: 2px;
 }
 
 h2::before{
-    color:rgb(200, 200, 200);
+    color:rgb(175, 175, 175);
     font-size:0.66em;
-    content:'\25bc';
+    content:'\1431'; /* '\005E' '\25bc' */
     margin-right: .33em;
 }
 
 .collapsed::before{
-    content:'\27a4';
+    content:'\142F'; /* '\02C5' '\27a4' */
 }
 
 li {
