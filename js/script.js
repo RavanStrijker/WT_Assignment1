@@ -29,4 +29,51 @@ function collapseArticleHeaders() {
    }
 }
 
-window.addEventListener('load', addHandlers, false)
+window.addEventListener('load', addHandlers, false);
+
+function fillSelector(){
+   var selector = document.getElementById('selector');
+   var body = document.createElement("option");
+   var nav = document.createElement("option");
+   var article = document.createElement("option");
+   var section = document.createElement("option");
+   var aside = document.createElement("option");
+   var footer = document.createElement("option");
+   var optgroup0 = document.createElement("optgroup")
+   var optgroup1 = document.createElement("optgroup");
+
+   optgroup0.label = "Main-parts";
+   body.value = "body";
+   body.text = "Body";
+   nav.value = "nav";
+   nav.text = "Navigation";
+   section.value = "section";
+   section.text = "Main-section";
+   article.value = "article";
+   article.text = "Article";
+   aside.value = "aside";
+   aside.text = "Aside";
+   footer.value = "footer";
+   footer.text = "Footer";
+   optgroup1.label = "Sections";
+
+   selector.add(optgroup0);
+   selector.add(body);
+   selector.add(nav);
+   selector.add(section);
+   selector.add(article);
+   selector.add(aside);
+   selector.add(footer);
+   if(document.getElementsByTagName('section').length > 1) {
+      selector.add(optgroup1);
+   }
+   
+   for(i=1; i<document.getElementsByTagName('section').length; i++) {
+      var option = document.createElement("option");
+      option.value = document.getElementsByTagName('section')[i].id;
+      option.text = document.getElementsByTagName('section')[i].id;
+      selector.add(option);
+   }
+}
+
+window.addEventListener('load', fillSelector, false);
