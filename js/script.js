@@ -83,7 +83,7 @@ function enableEditor(){
 function fillEditor(){
    var editor = document.getElementById('editor');
    var fontsizeoptions = ["25%","50%","75%","100%","125%","150%","175%","200%"];
-   var coloroptions = ["black", "white", "orange", "red", "green", "blue", "yellow"];
+   var coloroptions = ["Black", "White", "Orange", "Red", "Green", "Blue", "Yellow"];
 
    var fontsizegroup = document.createElement("optgroup");
    fontsizegroup.label = "Font-size";
@@ -105,15 +105,11 @@ function addArrayElements(editor, array, category) {
    for (let i = 0; i < array.length; i++){
       var option = array[i];
       var toAdd = document.createElement("option");
-      toAdd.textContent = capitaliseFirst(option);
+      toAdd.textContent = option;
       toAdd.value = option;
       toAdd.category = category;
       editor.add(toAdd);
    }
-}
-
-function capitaliseFirst(str){
-   return str[0].toUpperCase() + str.substr(1);
 }
 
 function changeSelected(){
