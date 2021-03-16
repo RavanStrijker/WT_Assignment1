@@ -21,7 +21,7 @@ function collapseArticleHeaders() {
    // 1. Make articles less walls of text and 
    // 2. To provide a contrast with aside headers which aren't collapsed, to teach visitors that headers can be (un)collapsed
    const hs = document.getElementsByTagName('h2');
-   for (i=0; i<hs.length; i++) {
+   for (let i=0; i<hs.length; i++) {
       if (hs[i].parentElement.nodeName !== "ASIDE") {
          hs[i].classList.toggle("collapsed");
          hs[i].nextElementSibling.style.display="none";
