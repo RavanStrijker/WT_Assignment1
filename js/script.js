@@ -1,5 +1,5 @@
 function addHandlers(){
-   const main = document.getElementsByTagName("main")[0]
+   const main = document.getElementsByTagName("main")[0];
    main.addEventListener("click", collapsibleHeaders);
    collapseArticleHeaders();
 }
@@ -29,7 +29,6 @@ function collapseArticleHeaders() {
    }
 }
 
-window.addEventListener('load', addHandlers, false);
 
 function fillSelector(){
    var selector = document.getElementById('selector');
@@ -39,7 +38,7 @@ function fillSelector(){
    var section = document.createElement("option");
    var aside = document.createElement("option");
    var footer = document.createElement("option");
-   var optgroup0 = document.createElement("optgroup")
+   var optgroup0 = document.createElement("optgroup");
    var optgroup1 = document.createElement("optgroup");
 
    optgroup0.label = "Main-parts";
@@ -68,7 +67,7 @@ function fillSelector(){
       selector.add(optgroup1);
    }
 
-   for(i=1; i<document.getElementsByTagName('section').length; i++) {
+   for(let i=1; i<document.getElementsByTagName('section').length; i++) {
       var option = document.createElement("option");
       option.value = document.getElementsByTagName('section')[i].id;
       option.text = document.getElementsByTagName('section')[i].id;
@@ -76,7 +75,7 @@ function fillSelector(){
    }
 }
 
-window.addEventListener('load', fillSelector, false);
+
 
 function enableEditor(){
    var editor = document.getElementById('editor');
@@ -102,4 +101,10 @@ function changeSelected(){
    }
 }
 
-window.addEventListener('load', enableEditor, false);
+function initialise() {
+   addHandlers();
+   fillSelector();
+   enableEditor();
+}
+
+window.addEventListener('load', initialise, false);
