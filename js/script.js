@@ -17,9 +17,9 @@ function collapsibleHeaders(e) {
 }
 
 function collapseArticleHeaders() {
-   // Default behaviour to have article headers collapsed, to 
-   // 1. Make articles less walls of text and 
-   // 2. To provide a contrast with aside headers which aren't collapsed, to teach visitors that headers can be (un)collapsed
+   /* Default behaviour to have article headers collapsed, to 
+   1. Make articles less walls of text and 
+   2. To provide a contrast with aside headers which aren't collapsed, to teach visitors that headers can be (un)collapsed */
    const hs = document.getElementsByTagName('h2');
    for (let i=0; i<hs.length; i++) {
       if (hs[i].parentElement.nodeName !== "ASIDE") {
@@ -28,7 +28,6 @@ function collapseArticleHeaders() {
       }
    }
 }
-
 
 function fillSelector(){
    var selector = document.getElementById('selector');
@@ -81,23 +80,23 @@ function enableEditor(){
 
 function fillEditor(){
    var editor = document.getElementById('editor');
-   var fontsizeoptions = ["25%","50%","75%","100%","125%","150%","175%","200%"];
-   var coloroptions = ["Black", "White", "Orange", "Red", "Green", "Blue", "Yellow"];
+   var fontSizeOptions = ["25%","50%","75%","100%","125%","150%","175%","200%"];
+   var colorOptions = ["Black", "White", "Orange", "Red", "Green", "Blue", "Yellow"];
 
-   var fontsizegroup = document.createElement("optgroup");
-   fontsizegroup.label = "Font size";
-   editor.add(fontsizegroup);
-   addArrayElements(editor, fontsizeoptions, "Font-size");
+   var fontSizeGroup = document.createElement("optgroup");
+   fontSizeGroup.label = "Font size";
+   editor.add(fontSizeGroup);
+   addArrayElements(editor, fontSizeOptions, "Font-size");
 
-   var colorgroup = document.createElement("optgroup");
-   colorgroup.label = "Text color";
-   editor.add(colorgroup);
-   addArrayElements(editor, coloroptions, "Text-color");
+   var colorGroup = document.createElement("optgroup");
+   colorGroup.label = "Text color";
+   editor.add(colorGroup);
+   addArrayElements(editor, colorOptions, "Text-color");
 
-   var bgcolorgroup = document.createElement("optgroup");
-   bgcolorgroup.label = "Background";
-   editor.add(bgcolorgroup);
-   addArrayElements(editor, coloroptions, "Background");
+   var bgColorGroup = document.createElement("optgroup");
+   bgColorGroup.label = "Background";
+   editor.add(bgColorGroup);
+   addArrayElements(editor, colorOptions, "Background");
 }
 
 function addArrayElements(editor, array, category) {
@@ -130,98 +129,47 @@ function changeSelected(){
    }
 }
 
+function evaluateMCAnswer(e){
+   if(e.target && e.target.nodeName == "INPUT" && e.target.type === 'radio' && e.target.value==='false'){
+      e.target.parentNode.parentNode.style.color = "red";
+   }
+   else if (e.target && e.target.nodeName == "INPUT" && e.target.type === 'radio' && e.target.value==='true'){
+      e.target.parentNode.parentNode.style.color = "green";
+   }
+}
+
+function evaluateFillAnswer(e){
+   let article = document.getElementById('question'+e.target.id);
+   let givenAnswers = article.getElementsByTagName("INPUT");
+   var correct = true;
+   for (let i = 0; i<givenAnswers.length; i++){
+      correct = ((givenAnswers[i].value.toLowerCase() === this.answers[i].toLowerCase()) && correct);
+   }
+
+   if (correct) {
+      e.target.parentNode.parentNode.style.color ="green";
+   }
+   else {
+      e.target.parentNode.parentNode.style.color ="red";
+   }
+}
+
 function initialise() {
-   doAFew(createQuestions());
+   fillAssessment();
    addHandlers();
    fillSelector();
    fillEditor();
    enableEditor();
 }
 
-function createQuestions(){
-   a11 = new multipleChoiceAnswer("Tim Berners-Lee",true);
-   a12 = new multipleChoiceAnswer("Sergey Sosnovsky",false);
-   a13 = new multipleChoiceAnswer("Bill Gates",false);
-   a14 = new multipleChoiceAnswer("Steve Jobs",false);
-   answers1 = [a11,a12,a13,a14];
-   q1 = new MultipleChoice("Who made HTML5?",answers1);
-
-   a21 = new multipleChoiceAnswer("2018",false);
-   a22 = new multipleChoiceAnswer("2019",false);
-   a23 = new multipleChoiceAnswer("2020",true);
-   a24 = new multipleChoiceAnswer("2021",false);
-   answers2 = [a21,a22,a23,a24];
-   q2 = new MultipleChoice("When did Flash become obsolete?",answers2)
-   return [q1,q2];
-}
-
-
-function doAFew(questions){
-   questions.shuffle();
-   if (document.title === "Assessment"){
-      for (let i = 0; i < questions.length; i++){
-         createArticle(i,questions[i].description,questions[i].answers);
-      }   
-   }
-}
-
-function createArticle(nr,question,answers){
-   let mainSection = document.getElementById("main-section");
-   let testArticle = document.createElement("ARTICLE");
-   testArticle.setAttribute('id','question'+nr);
-
-   let testHeading = document.createElement("H3");
-   testHeading.textContent = "Q" + (nr+1) + ": " + question;
-   testArticle.appendChild(testHeading);
-
-   var testForm = document.createElement("FORM");
-
-   answers.shuffle();
-   createAnswers(testForm, answers, nr)
-
-   testArticle.appendChild(testForm);
-
-   mainSection.appendChild(testArticle);
-}
-
-function createAnswers(form, answerArray, nr){
-   for (let i=0; i<answerArray.length; i++){
-      var input = document.createElement("INPUT");
-      input.setAttribute('type','radio');
-      input.setAttribute('name','answer'+nr);
-      input.setAttribute('value',answerArray[i].correct);
-      input.setAttribute('id','answer'+nr+i); // will need a way to identify whether it's the correct answer or not
-      var label = document.createElement("LABEL");
-      label.setAttribute('for','answer'+nr+i);
-      label.appendChild(document.createTextNode(answerArray[i].value));
-      form.appendChild(document.createElement("BR"));
-      form.appendChild(input);
-      form.appendChild(label);
-   }
-   form.addEventListener('click',ping);
-}
-
-// for fill in the blanks we could designate one or more split locations with a character such as #, and then String.split('#');
-
-function ping(e){
-   if(e.target && e.target.nodeName == "INPUT" && e.target.value==='false'){
-      e.target.parentNode.parentNode.style.color = "red";
-   }
-   else {
-      e.target.parentNode.parentNode.style.color = "green";
-   }
-}
-
 function fillAssessment(){
-   let mainSection = document.getElementById("main-section");
-   var testArticle = document.createElement("ARTICLE");
-
-   let testHeading = document.createElement("H3")
-   var testText = document.createTextNode("This is a test text element");
-   testHeading.textContent = "Heading";
-   testArticle.appendChild(testHeading);
-   testArticle.appendChild(testText);
-   mainSection.appendChild(testArticle);
+   if (document.title === "Assessment"){
+      let questions = multiQuestions().concat(fillQuestions());
+      questions.shuffle();
+      let mainSection = document.getElementById("main-section");
+      for (let nr=0; nr<questions.length; nr++) {
+         mainSection.appendChild(questions[nr].createArticle(nr));
+   }}
 }
 
 Array.prototype.shuffle = function() {
@@ -232,29 +180,139 @@ Array.prototype.shuffle = function() {
       this[j] = this[i];
       this[i] = temp;
    }
-}
-
-// todo
+};
 
 class Question {
    constructor(desc) {
       this.description = desc;
    }
-}
 
-class MultipleChoice {
-   constructor(desc, answ){
-      this.description = desc; //super(description); // i dont fully get this yet
-      this.answers = answ
+   createBaseArticle(nr){
+      let article = document.createElement("ARTICLE");
+      article.setAttribute('id','question'+nr);
+   
+      let questionHeading = document.createElement("H1");
+      questionHeading.textContent = "Q" + (nr+1) + ": " + this.description;
+      article.appendChild(questionHeading);
+      return article;
    }
 
 }
 
-class multipleChoiceAnswer{
+class MultipleChoice extends Question {
+   constructor(desc, answ){
+      super(desc);
+      this.answers = answ;
+   }
+
+   createArticle(nr){
+      let article = super.createBaseArticle(nr);
+   
+      var answerForm = document.createElement("FORM");
+      this.answers.shuffle();
+      this.createAnswers(answerForm, nr);
+   
+      article.appendChild(answerForm);
+      article.addEventListener('click',evaluateMCAnswer);
+      return article;
+   }
+   
+   createAnswers(form, nr){
+      for (let i=0; i<this.answers.length; i++){
+         var input = document.createElement("INPUT");
+         input.setAttribute('type','radio');
+         input.setAttribute('name','answer'+nr);
+         input.setAttribute('value',this.answers[i].correct);
+         input.setAttribute('id','answer'+nr+i);
+
+         var label = document.createElement("LABEL");
+         label.setAttribute('for','answer'+nr+i);
+         label.appendChild(document.createTextNode(this.answers[i].value));
+
+         form.appendChild(document.createElement("BR"));
+         form.appendChild(input);
+         form.appendChild(label);
+      }
+   }
+}
+
+class MultipleChoiceAnswer{
    constructor(val, correct){
       this.value = val;
-      this.correct = correct
+      this.correct = correct;
    }
+}
+
+class FillIn extends Question {
+   constructor(desc, partialansw, answ) {
+      super(desc);
+      this.partialAnswer = partialansw.split('#');
+      this.answers = answ;
+   }
+
+   createArticle(nr){
+      let article = super.createBaseArticle(nr);
+   
+      var answerForm = document.createElement("FORM");
+
+      for (let i=0; i<this.answers.length; i++){
+         this.createAnswer(answerForm, i, nr);
+      }
+      if (this.partialAnswer.length > this.answers.length) {
+         let rest = document.createTextNode(this.partialAnswer[this.partialAnswer.length - 1]+' ');
+         answerForm.appendChild(rest);
+      }
+      
+      let btn = document.createElement("BUTTON");
+      btn.setAttribute('type','button');
+      btn.setAttribute('id',nr);
+      btn.appendChild(document.createTextNode('Evaluate'));
+      btn.addEventListener('click',evaluateFillAnswer.bind(this));
+      answerForm.appendChild(btn);
+      
+      article.appendChild(answerForm);
+      article.addEventListener('change',evaluateMCAnswer);
+      
+      return article;
+   }
+
+   createAnswer(form, i, nr){
+      let input = document.createElement("INPUT");
+      input.setAttribute('type','text');
+      input.setAttribute('id','answer'+nr+i);
+
+      let label = document.createElement("LABEL");
+      label.setAttribute('for','answer'+nr+i);
+      label.appendChild(document.createTextNode(this.partialAnswer[i]));
+      form.appendChild(label);
+      form.appendChild(input);
+      console.log(form);
+   }
+}
+
+function multiQuestions(){
+   let a11 = new MultipleChoiceAnswer("Tim Berners-Lee",true);
+   let a12 = new MultipleChoiceAnswer("Sergey Sosnovsky",false);
+   let a13 = new MultipleChoiceAnswer("Bill Gates",false);
+   let a14 = new MultipleChoiceAnswer("Steve Jobs",false);
+   let answers1 = [a11,a12,a13,a14];
+   let q1 = new MultipleChoice("Who made WWW?",answers1);
+
+   let a21 = new MultipleChoiceAnswer("2018",false);
+   let a22 = new MultipleChoiceAnswer("2019",false);
+   let a23 = new MultipleChoiceAnswer("2020",true);
+   let a24 = new MultipleChoiceAnswer("2021",false);
+   let a25 = new MultipleChoiceAnswer("2016",false);
+   let a26 = new MultipleChoiceAnswer("2017",false);
+   let answers2 = [a21,a22,a23,a24,a25,a26];
+   let q2 = new MultipleChoice("When did Flash become obsolete?",answers2);
+   return [q1,q2];
+}
+
+function fillQuestions(){
+   let q1 = new FillIn("Fill in the blank","The stock # is going to the #.",["GME","moon"]);
+   let q2 = new FillIn("Fill in the blank","# I'm shufflin'",["Everyday"]);
+   return [q1,q2];
 }
 
 
