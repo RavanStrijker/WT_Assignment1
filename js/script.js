@@ -131,35 +131,53 @@ function changeSelected(){
 }
 
 function initialise() {
-   doAFew();
+   doAFew(createQuestions());
    addHandlers();
    fillSelector();
    fillEditor();
    enableEditor();
 }
 
-function doAFew(){
+function createQuestions(){
+   a11 = new multipleChoiceAnswer("Tim Berners-Lee",true);
+   a12 = new multipleChoiceAnswer("Sergey Sosnovsky",false);
+   a13 = new multipleChoiceAnswer("Bill Gates",false);
+   a14 = new multipleChoiceAnswer("Steve Jobs",false);
+   answers1 = [a11,a12,a13,a14];
+   q1 = new MultipleChoice("Who made HTML5?",answers1);
+
+   a21 = new multipleChoiceAnswer("2018",false);
+   a22 = new multipleChoiceAnswer("2019",false);
+   a23 = new multipleChoiceAnswer("2020",true);
+   a24 = new multipleChoiceAnswer("2021",false);
+   answers2 = [a21,a22,a23,a24];
+   q2 = new MultipleChoice("When did Flash become obsolete?",answers2)
+   return [q1,q2];
+}
+
+
+function doAFew(questions){
+   questions.shuffle();
    if (document.title === "Assessment"){
-      for (let i = 0; i < 4; i++){
-         createArticle(i);
-      }
+      for (let i = 0; i < questions.length; i++){
+         createArticle(i,questions[i].description,questions[i].answers);
+      }   
    }
 }
 
-function createArticle(nr){
+function createArticle(nr,question,answers){
    let mainSection = document.getElementById("main-section");
    let testArticle = document.createElement("ARTICLE");
    testArticle.setAttribute('id','question'+nr);
 
    let testHeading = document.createElement("H3");
-   testHeading.textContent = "Q" + nr + ": How much wood would a woodchuck chuck if a woodchuck could chuck wood?";
+   testHeading.textContent = "Q" + (nr+1) + ": " + question;
    testArticle.appendChild(testHeading);
 
    var testForm = document.createElement("FORM");
 
-   answ = ["Yes","No","Maybe","I don't know"];
-   answ.shuffle();
-   createAnswers(testForm, answ, nr)
+   answers.shuffle();
+   createAnswers(testForm, answers, nr)
 
    testArticle.appendChild(testForm);
 
@@ -171,11 +189,11 @@ function createAnswers(form, answerArray, nr){
       var input = document.createElement("INPUT");
       input.setAttribute('type','radio');
       input.setAttribute('name','answer'+nr);
-      input.setAttribute('value','answer'+i);
+      input.setAttribute('value',answerArray[i].correct);
       input.setAttribute('id','answer'+nr+i); // will need a way to identify whether it's the correct answer or not
       var label = document.createElement("LABEL");
       label.setAttribute('for','answer'+nr+i);
-      label.appendChild(document.createTextNode(answerArray[i]));
+      label.appendChild(document.createTextNode(answerArray[i].value));
       form.appendChild(document.createElement("BR"));
       form.appendChild(input);
       form.appendChild(label);
@@ -186,8 +204,11 @@ function createAnswers(form, answerArray, nr){
 // for fill in the blanks we could designate one or more split locations with a character such as #, and then String.split('#');
 
 function ping(e){
-   if(e.target && e.target.nodeName == "INPUT"){
-      console.log(e.target.id + ' ' + e.target.value);
+   if(e.target && e.target.nodeName == "INPUT" && e.target.value==='false'){
+      e.target.parentNode.parentNode.style.color = "red";
+   }
+   else {
+      e.target.parentNode.parentNode.style.color = "green";
    }
 }
 
@@ -216,21 +237,24 @@ Array.prototype.shuffle = function() {
 // todo
 
 class Question {
-   constructor(description) {
-      this.description = description;
+   constructor(desc) {
+      this.description = desc;
    }
 }
 
-class MultipleChoice extends Question {
-   constructor(){
-      super(description)
+class MultipleChoice {
+   constructor(desc, answ){
+      this.description = desc; //super(description); // i dont fully get this yet
+      this.answers = answ
    }
 
 }
 
-
-function domQuestion(q){
-
+class multipleChoiceAnswer{
+   constructor(val, correct){
+      this.value = val;
+      this.correct = correct
+   }
 }
 
 
