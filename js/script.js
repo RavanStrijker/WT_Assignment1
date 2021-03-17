@@ -32,46 +32,45 @@ function collapseArticleHeaders() {
 
 function fillSelector(){
    var selector = document.getElementById('selector');
-   var body = document.createElement("option");
-   var nav = document.createElement("option");
-   var article = document.createElement("option");
-   var section = document.createElement("option");
-   var aside = document.createElement("option");
-   var footer = document.createElement("option");
-   var optgroup0 = document.createElement("optgroup");
-   var optgroup1 = document.createElement("optgroup");
 
-   optgroup0.label = "Main-parts";
-   body.value = "body";
-   body.text = "Body";
-   nav.value = "nav";
-   nav.text = "Navigation";
-   section.value = "section";
-   section.text = "Main-section";
-   article.value = "article";
-   article.text = "Article";
-   aside.value = "aside";
-   aside.text = "Aside";
-   footer.value = "footer";
-   footer.text = "Footer";
-   optgroup1.label = "Sections";
+   var mainElements = [];
+   var sections = [];
+   var whitelist = ["SECTION","BODY","MAIN","NAV","ARTICLE","ASIDE","FOOTER"]
 
-   selector.add(optgroup0);
-   selector.add(body);
-   selector.add(nav);
-   selector.add(section);
-   selector.add(article);
-   selector.add(aside);
-   selector.add(footer);
-   if(document.getElementsByTagName('section').length > 1) {
-      selector.add(optgroup1);
+   domWalk(whitelist, mainElements, sections);
+
+   var mainGroup = document.createElement("optgroup");
+   mainGroup.label = "Main parts";
+   selector.add(mainGroup);
+   addArrayElements(selector, mainElements, undefined);
+
+   if(sections.length) {
+      var sectionGroup = document.createElement("optgroup");
+      sectionGroup.label = "Sections";
+      selector.add(sectionGroup);
+      addArrayElements(selector, sections, undefined);
    }
+}
 
-   for(let i=1; i<document.getElementsByTagName('section').length; i++) {
-      var option = document.createElement("option");
-      option.value = document.getElementsByTagName('section')[i].id;
-      option.text = document.getElementsByTagName('section')[i].id;
-      selector.add(option);
+function domWalk (whitelist, mainElements, sections) {
+   for (elem of document.getElementsByTagName("html")[0].childNodes){
+      if (elem.nodeType == 1){
+         recursiveDomWalk(elem, whitelist, mainElements, sections);
+      }
+   }
+}
+
+function recursiveDomWalk(elem, whitelist, mainElements, sections) {
+   if (elem.nodeType == 1 && whitelist.includes(elem.nodeName)){
+      if (elem.id !== "main-section" && elem.nodeName === "SECTION") {
+         sections.push(elem.id);
+      }
+      else {
+         mainElements.push(elem.id);
+      }
+      for (i of elem.childNodes) {
+         recursiveDomWalk(i, whitelist, mainElements, sections);
+      }
    }
 }
 
@@ -86,12 +85,12 @@ function fillEditor(){
    var coloroptions = ["Black", "White", "Orange", "Red", "Green", "Blue", "Yellow"];
 
    var fontsizegroup = document.createElement("optgroup");
-   fontsizegroup.label = "Font-size";
+   fontsizegroup.label = "Font size";
    editor.add(fontsizegroup);
    addArrayElements(editor, fontsizeoptions, "Font-size");
 
    var colorgroup = document.createElement("optgroup");
-   colorgroup.label = "Text-color";
+   colorgroup.label = "Text color";
    editor.add(colorgroup);
    addArrayElements(editor, coloroptions, "Text-color");
 
@@ -105,7 +104,7 @@ function addArrayElements(editor, array, category) {
    for (let i = 0; i < array.length; i++){
       var option = array[i];
       var toAdd = document.createElement("option");
-      toAdd.textContent = option;
+      toAdd.textContent = option[0].toUpperCase() + option.substr(1);
       toAdd.value = option;
       toAdd.category = category;
       editor.add(toAdd);
