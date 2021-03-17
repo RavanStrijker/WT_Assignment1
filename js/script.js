@@ -286,32 +286,36 @@ class FillIn extends Question {
       label.appendChild(document.createTextNode(this.partialAnswer[i]));
       form.appendChild(label);
       form.appendChild(input);
-      console.log(form);
    }
 }
 
 function multiQuestions(){
    let a11 = new MultipleChoiceAnswer("Tim Berners-Lee",true);
    let a12 = new MultipleChoiceAnswer("Sergey Sosnovsky",false);
-   let a13 = new MultipleChoiceAnswer("Bill Gates",false);
-   let a14 = new MultipleChoiceAnswer("Steve Jobs",false);
+   let a13 = new MultipleChoiceAnswer("Arthur C. Clarke",false);
+   let a14 = new MultipleChoiceAnswer("Robert Melancton Metcalfe",false);
    let answers1 = [a11,a12,a13,a14];
-   let q1 = new MultipleChoice("Who made WWW?",answers1);
+   let q1 = new MultipleChoice("Who invented the World Wide Web?",answers1);
 
-   let a21 = new MultipleChoiceAnswer("2018",false);
-   let a22 = new MultipleChoiceAnswer("2019",false);
-   let a23 = new MultipleChoiceAnswer("2020",true);
-   let a24 = new MultipleChoiceAnswer("2021",false);
-   let a25 = new MultipleChoiceAnswer("2016",false);
-   let a26 = new MultipleChoiceAnswer("2017",false);
-   let answers2 = [a21,a22,a23,a24,a25,a26];
-   let q2 = new MultipleChoice("When did Flash become obsolete?",answers2);
-   return [q1,q2];
+   let a21 = new MultipleChoiceAnswer("USA",false);
+   let a22 = new MultipleChoiceAnswer("USSR",false);
+   let a23 = new MultipleChoiceAnswer("Switzerland",true);
+   let a24 = new MultipleChoiceAnswer("Australia",false);
+   let answers2 = [a21,a22,a23,a24];
+   let q2 = new MultipleChoice("Where was the internet invented?",answers2);
+
+   let a31 = new MultipleChoiceAnswer("Nanjing University",false);
+   let a32 = new MultipleChoiceAnswer("Harbin Institute of Technology",false);
+   let a33 = new MultipleChoiceAnswer("Beihang University",true);
+   let a34 = new MultipleChoiceAnswer("Fudan University",false);
+   let answers3 = [a31,a32,a33,a34];
+   let q3 = new MultipleChoice("Which university is the Chinese host of W3C?", answers3);
+   return [q1,q2,q3];
 }
 
 function fillQuestions(){
-   let q1 = new FillIn("Fill in the blank","The stock # is going to the #.",["GME","moon"]);
-   let q2 = new FillIn("Fill in the blank","# I'm shufflin'",["Everyday"]);
+   let q1 = new FillIn("Fill in the blank","The four levels of maturity for a W3C process are working draft, candidate recommendation, # and W3C recommendation.",["proposed recommendation"]);
+   let q2 = new FillIn("Fill in the blank","Tim Berners-Lee was born in # and his online nickname is #.",["1995", "TimBL"]);
    return [q1,q2];
 }
 
