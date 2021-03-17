@@ -35,7 +35,7 @@ function fillSelector(){
 
    var mainElements = [];
    var sections = [];
-   var whitelist = ["SECTION","BODY","MAIN","NAV","ARTICLE","ASIDE","FOOTER"]
+   var whitelist = ["SECTION","BODY","MAIN","NAV","ARTICLE","ASIDE","FOOTER"];
 
    domWalk(whitelist, mainElements, sections);
 
@@ -53,7 +53,7 @@ function fillSelector(){
 }
 
 function domWalk (whitelist, mainElements, sections) {
-   for (elem of document.getElementsByTagName("html")[0].childNodes){
+   for (let elem of document.getElementsByTagName("html")[0].childNodes){
       if (elem.nodeType == 1){
          recursiveDomWalk(elem, whitelist, mainElements, sections);
       }
@@ -68,7 +68,7 @@ function recursiveDomWalk(elem, whitelist, mainElements, sections) {
       else {
          mainElements.push(elem.id);
       }
-      for (i of elem.childNodes) {
+      for (let i of elem.childNodes) {
          recursiveDomWalk(i, whitelist, mainElements, sections);
       }
    }
