@@ -1,7 +1,6 @@
 function addHandlers(){
    const main = document.getElementsByTagName("main")[0];
    main.addEventListener("click", collapsibleHeaders);
-   collapseArticleHeaders();
 }
 
 function collapsibleHeaders(e) {
@@ -154,14 +153,6 @@ function evaluateFillAnswer(e){
    }
 }
 
-function initialise() {
-   fillAssessment();
-   addHandlers();
-   fillSelector();
-   fillEditor();
-   enableEditor();
-}
-
 function fillAssessment(){
    if (document.title === "Assessment"){
       let questions = multiQuestions().concat(fillQuestions());
@@ -244,8 +235,8 @@ class MultipleChoiceAnswer{
 }
 
 class FillIn extends Question {
-   constructor(desc, partialansw, answ) {
-      super(desc);
+   constructor(partialansw, answ) {
+      super("Fill in the blank");
       this.partialAnswer = partialansw.split('#');
       this.answers = answ;
    }
@@ -270,9 +261,7 @@ class FillIn extends Question {
       btn.addEventListener('click',evaluateFillAnswer.bind(this));
       answerForm.appendChild(btn);
       
-      article.appendChild(answerForm);
-      article.addEventListener('change',evaluateMCAnswer);
-      
+      article.appendChild(answerForm);      
       return article;
    }
 
@@ -314,10 +303,19 @@ function multiQuestions(){
 }
 
 function fillQuestions(){
-   let q1 = new FillIn("Fill in the blank","The four levels of maturity for a W3C process are working draft, candidate recommendation, # and W3C recommendation.",["proposed recommendation"]);
-   let q2 = new FillIn("Fill in the blank","Tim Berners-Lee was born in # and his online nickname is #.",["1995", "TimBL"]);
+   let q1 = new FillIn("The four levels of maturity for a W3C process are working draft, candidate recommendation, # and W3C recommendation.",["proposed recommendation"]);
+   let q2 = new FillIn("Tim Berners-Lee was born in # and his online nickname is #.",["1995", "TimBL"]);
    return [q1,q2];
 }
 
+
+function initialise() {
+   fillAssessment();
+   addHandlers();
+   fillSelector();
+   fillEditor();
+   enableEditor();
+   collapseArticleHeaders();
+}
 
 window.addEventListener('load', initialise, false);
