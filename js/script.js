@@ -131,10 +131,107 @@ function changeSelected(){
 }
 
 function initialise() {
+   doAFew();
    addHandlers();
    fillSelector();
    fillEditor();
    enableEditor();
 }
+
+function doAFew(){
+   if (document.title === "Assessment"){
+      for (let i = 0; i < 4; i++){
+         createArticle(i);
+      }
+   }
+}
+
+function createArticle(nr){
+   let mainSection = document.getElementById("main-section");
+   let testArticle = document.createElement("ARTICLE");
+   testArticle.setAttribute('id','question'+nr);
+
+   let testHeading = document.createElement("H3");
+   testHeading.textContent = "Q" + nr + ": How much wood would a woodchuck chuck if a woodchuck could chuck wood?";
+   testArticle.appendChild(testHeading);
+
+   var testForm = document.createElement("FORM");
+
+   answ = ["Yes","No","Maybe","I don't know"];
+   answ.shuffle();
+   createAnswers(testForm, answ, nr)
+
+   testArticle.appendChild(testForm);
+
+   mainSection.appendChild(testArticle);
+}
+
+function createAnswers(form, answerArray, nr){
+   for (let i=0; i<answerArray.length; i++){
+      var input = document.createElement("INPUT");
+      input.setAttribute('type','radio');
+      input.setAttribute('name','answer'+nr);
+      input.setAttribute('value','answer'+i);
+      input.setAttribute('id','answer'+nr+i); // will need a way to identify whether it's the correct answer or not
+      var label = document.createElement("LABEL");
+      label.setAttribute('for','answer'+nr+i);
+      label.appendChild(document.createTextNode(answerArray[i]));
+      form.appendChild(document.createElement("BR"));
+      form.appendChild(input);
+      form.appendChild(label);
+   }
+   form.addEventListener('click',ping);
+}
+
+// for fill in the blanks we could designate one or more split locations with a character such as #, and then String.split('#');
+
+function ping(e){
+   if(e.target && e.target.nodeName == "INPUT"){
+      console.log(e.target.id + ' ' + e.target.value);
+   }
+}
+
+function fillAssessment(){
+   let mainSection = document.getElementById("main-section");
+   var testArticle = document.createElement("ARTICLE");
+
+   let testHeading = document.createElement("H3")
+   var testText = document.createTextNode("This is a test text element");
+   testHeading.textContent = "Heading";
+   testArticle.appendChild(testHeading);
+   testArticle.appendChild(testText);
+   mainSection.appendChild(testArticle);
+}
+
+Array.prototype.shuffle = function() {
+   // Fisher-Yates shuffle
+   for (let i = this.length - 1; i; i--){
+      let j = Math.floor(Math.random()*(i+1));
+      let temp = this[j];
+      this[j] = this[i];
+      this[i] = temp;
+   }
+}
+
+// todo
+
+class Question {
+   constructor(description) {
+      this.description = description;
+   }
+}
+
+class MultipleChoice extends Question {
+   constructor(){
+      super(description)
+   }
+
+}
+
+
+function domQuestion(q){
+
+}
+
 
 window.addEventListener('load', initialise, false);
